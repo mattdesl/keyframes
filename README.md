@@ -29,23 +29,23 @@ console.log( keyframes.frames )
 
 [![NPM](https://nodei.co/npm/keyframes.png)](https://nodei.co/npm/keyframes/)
 
-### `keyframes([frames][, sorted])`
+#### `var keys = require('keyframes')([frames][, sorted])`
 
-Creates a new keyframe list with an optional list of frames to use by default. The frames will then be sorted in order of their time stamp. The `new` keyword can also be used here.
+Creates a new set of keyframes, optionally with some frames to use as default. The frames will then be sorted in order of their time stamp. 
 
 It's assumed the list of keyframes is unsorted; but if it already has been, you can pass `false` for `sorted` and it won't perform another sort.
 
-### `keyframes.get(timeStamp[, radius])`
+#### `keyframes.get(timeStamp[, radius])`
 
-Gets the nearest keyframe to the specified time stamp. If `radius` is not a number, it gives whichever keyframe is closest. If `radius` is a number, it will only find results that are within the given radius, and otherwise return null.
+Gets the nearest keyframe to the specified time stamp. If `radius` is not specified, this will return the closest keyframe. If `radius` is a number, this only returns the closest result within that distance; otherwise returns null.
 
 If it can't find any keyframes, null is returned.
 
-### `keyframes.getIndex(timeStamp[, radius])`
+#### `keyframes.getIndex(timeStamp[, radius])`
 
-Like `get()`, but returns an index instead of a keyframe object.
+Like `get()`, but returns an index to the `frames` array instead of a keyframe object.
 
-### `keyframes.value(timeStamp[, ease])`
+#### `keyframes.value(timeStamp[, ease])`
 
 Determines the value at the given time stamp; bounded to the first and last keyframe (i.e. any time stamps before the first keyframe will receive it's value).
 
@@ -55,19 +55,23 @@ If both `value` of the interpolated frames are number types, they will be interp
 
 You can also pass your own interpolation function for custom easings. This will get called with `(startFrame, endFrame, t)`, which you can operate to return a value. 
 
-### `keyframes.next(timeStamp)` 
-### `keyframes.previous(timeStamp)`
+#### `keyframes.next(timeStamp)` 
+#### `keyframes.previous(timeStamp)`
 
 This is useful for jumping left and right in a timeline editor. From the given time stamp, it will return the next keyframe to the left or right. If none exist (i.e. we are at the bounds already) then null will be returned.
 
-### `keyframes.add(frame)`
-### `keyframes.remove(frame)`
+#### `keyframes.add(frame)`
+#### `keyframes.remove(frame)`
 
 Adds/removes a "keyframe" object (which has `time` and `value` properties). When a new frame is added, the list is re-sorted. For bulk adds, you may want to access the `frames` object directly.
 
-### `keyframes.sort()`
+#### `keyframes.sort()`
 
 To be called when you manually change the underlying `frames` structure (i.e. after a bulk add).
+
+#### `keyframes.frames`
+
+The underlying array that holds keyframes.
 
 ## License
 
