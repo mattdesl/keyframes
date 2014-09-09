@@ -76,6 +76,10 @@ Similar to `Array.splice`, this allows you to remove or insert keyframes within 
 
 To be called when you manually change the underlying `frames` structure (i.e. after a bulk add).
 
+#### `keys.clear()`
+
+Clears the list of keyframes.
+
 #### `keys.frames`
 
 The underlying array that holds keyframes.
