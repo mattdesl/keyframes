@@ -41,6 +41,8 @@ It's assumed the list of keyframes is unsorted; but if it already has been, you 
 
 Gets the nearest keyframe to the specified time stamp. If `radius` is not specified, this will return the closest keyframe. If `radius` is a number, this only returns the closest result within that distance; otherwise returns null.
 
+If radius is zero, this is a 'strict match' (i.e. only when time stamp is exactly matching the keyframe).
+
 If it can't find any keyframes, null is returned.
 
 #### `keys.getIndex(timeStamp[, radius])`

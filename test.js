@@ -19,8 +19,10 @@ test('timeline controls', function(t) {
 	t.equal(c1.count, 3, 'count is correct')
 	t.deepEqual(c1.frames, sorted, 'the keys are sorted')
 
-	t.equal(c1.get(3.5, 0.4), null, 'keyframeAt with small radius returns null' )
-	t.deepEqual(c1.get(3.5), sorted[2], 'keyframeAt finds nearest keyframe' )
+	t.equal(c1.get(3.5, 0.4), null, 'get with small radius returns null' )
+	t.deepEqual(c1.get(3.5), sorted[2], 'get finds nearest keyframe' )
+	t.deepEqual(c1.get(1, 0), null, 'get strict')
+	t.deepEqual(c1.get(2, 0), sorted[1], 'get strict')
 
 	t.deepEqual(c1.next(-1), sorted[0], 'jumps to next keyframe')
 	t.deepEqual(c1.next(0.5), sorted[1], 'jumps to next keyframe')
