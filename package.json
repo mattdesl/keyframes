@@ -1,5 +1,5 @@
 {
-  "name": "timeline-frames",
+  "name": "keyframes",
   "version": "1.0.0",
   "description": "keyframe utils for a generic timeline",
   "main": "index.js",
@@ -32,10 +32,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mattdesl/timeline-frames.git"
+    "url": "git://github.com/mattdesl/keyframes.git"
   },
-  "homepage": "https://github.com/mattdesl/timeline-frames",
+  "homepage": "https://github.com/mattdesl/keyframes",
   "bugs": {
-    "url": "https://github.com/mattdesl/timeline-frames/issues"
+    "url": "https://github.com/mattdesl/keyframes/issues"
   }
 }

@@ -1,6 +1,6 @@
-[![browser support](https://ci.testling.com/mattdesl/timeline-frames.png)](https://ci.testling.com/mattdesl/timeline-frames)
+[![browser support](https://ci.testling.com/mattdesl/keyframes.png)](https://ci.testling.com/mattdesl/keyframes)
 
-# timeline-frames
+# keyframes
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
@@ -27,7 +27,7 @@ console.log( keyframes.frames )
 
 ## Usage
 
-[![NPM](https://nodei.co/npm/timeline-frames.png)](https://nodei.co/npm/timeline-frames/)
+[![NPM](https://nodei.co/npm/keyframes.png)](https://nodei.co/npm/keyframes/)
 
 ### `keyframes([frames][, sorted])`
 
@@ -37,7 +37,7 @@ It's assumed the list of keyframes is unsorted; but if it already has been, you 
 
 ### `keyframes.get(timeStamp[, radius])`
 
-Gets the nearest keyframe to the specified time stamp. If `radius` is not a number, it give whichever keyframe is closest. If `radius` is a number, it will only find results that are within the given radius, and otherwise return null.
+Gets the nearest keyframe to the specified time stamp. If `radius` is not a number, it gives whichever keyframe is closest. If `radius` is a number, it will only find results that are within the given radius, and otherwise return null.
 
 If it can't find any keyframes, null is returned.
 
@@ -71,4 +71,4 @@ To be called when you manually change the underlying `frames` structure (i.e. af
 
 ## License
 
-MIT, see [LICENSE.md](http://github.com/mattdesl/timeline-frames/blob/master/LICENSE.md) for details.
+MIT, see [LICENSE.md](http://github.com/mattdesl/keyframes/blob/master/LICENSE.md) for details.
