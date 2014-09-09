@@ -25,6 +25,8 @@ var closest = keyframes.get( timeStamp, radius )
 console.log( keyframes.frames )
 ```
 
+The time stamps do not expect any particular unit. The value is generally a number or array of numbers, but you could also use a custom `ease` function (see below) if you want to support colors or some other data type. 
+
 ## Usage
 
 [![NPM](https://nodei.co/npm/keyframes.png)](https://nodei.co/npm/keyframes/)
@@ -47,13 +49,13 @@ Like `get()`, but returns an index to the `frames` array instead of a keyframe o
 
 #### `keys.value(timeStamp[, ease])`
 
-Determines the value at the given time stamp; bounded to the first and last keyframe (i.e. any time stamps before the first keyframe will receive it's value).
+Determines the value at the given time stamp, based on keyframe interpolation.
 
-If the time stamp falls on a keyframe, the value of that keyframe will be returned. If the time stamp falls between two keyframes, we use linear interpolation between the two.
+If the time stamp falls on a keyframe, the value of that keyframe will be returned. If the time stamp falls between two keyframes, we use linear interpolation between the two. The result is clamped to the first and last keyframes; so if your first keyframe is at `2.5` and you're querying the value at `0.0`, the returned value will be of the keyframe at `2.5`. 
 
-If both `value` of the interpolated frames are number types, they will be interpolated as expected. Otherwise, they are assumed to be an array with a variable number of components (e.g. `lerp(vec2a, vec2b, t)`).
+The `value` of keyframes can be numbers or arrays of numbers. For arrays, you should not manipulate the interpolated result in-place as it may be a direct reference to one of the keyframes' `value`.
 
-You can also pass your own interpolation function for custom easings. This will get called with `(startFrame, endFrame, t)`, which you can operate to return a value. 
+You can also pass your own interpolation function for custom easings. This will get called with `(startFrame, endFrame, t)`, which you can operate to return a value. This may be useful if your values are, for example, color strings and need a custom easing. 
 
 #### `keys.next(timeStamp)` 
 #### `keys.previous(timeStamp)`
