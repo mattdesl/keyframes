@@ -112,11 +112,12 @@ Keyframes.prototype.add = function(frame) {
     this.sort()
 }
 
-//Convenience; removes frame by strict identity
-Keyframes.prototype.remove = function(frame) {
-    var idx = this.frames.indexOf(frame)
-    if (idx > -1)
-        this.frames.splice(idx, 1)
+//convenience for .frames.splice
+//if items are inserted, a sort will be applied after insertion
+Keyframes.prototype.splice = function(index, howmany, itemsN) {
+    this.frames.splice.apply(this.frames, arguments)
+    if (arguments.length > 2)
+        this.sort()
 }
 
 //sorts the keyframes. you should do this after 
@@ -124,5 +125,12 @@ Keyframes.prototype.remove = function(frame) {
 Keyframes.prototype.sort = function() {
     this.frames.sort(sort)
 }
+
+
+Object.defineProperty(Keyframes.prototype, "count", {
+    get: function() {
+        return this.frames.length
+    }
+})
 
 module.exports = Keyframes

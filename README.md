@@ -25,7 +25,7 @@ var closest = keyframes.get( timeStamp, radius )
 console.log( keyframes.frames )
 ```
 
-The time stamps do not expect any particular unit. The value is generally a number or array of numbers, but you could also use a custom `ease` function (see below) if you want to support colors or some other data type. 
+This does not make any assumptions about the unit of time. The `value` for a keyframe is generally a number or array of numbers, but you could also use a custom `ease` function (see below) if you want to support color strings or some other data type. 
 
 ## Usage
 
@@ -63,9 +63,12 @@ You can also pass your own interpolation function for custom easings. This will 
 This is useful for jumping left and right in a timeline editor. From the given time stamp, it will return the next keyframe to the left or right. If none exist (i.e. we are at the bounds already) then null will be returned.
 
 #### `keys.add(frame)`
-#### `keys.remove(frame)`
 
-Adds/removes a "keyframe" object (which has `time` and `value` properties). When a new frame is added, the list is re-sorted. For bulk adds, you may want to access the `frames` object directly.
+Adds a "keyframe" object (which has `time` and `value` properties). When a new frame is added, the list is re-sorted. For bulk adds, you may want to access the `frames` object directly.
+
+#### `keys.splice(index, howmany, item1, ..., itemX)`
+
+Similar to `Array.splice`, this allows you to remove or insert keyframes within the array. If new keyframes have been inserted, the list will be re-sorted. 
 
 #### `keys.sort()`
 
