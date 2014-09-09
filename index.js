@@ -17,7 +17,7 @@ function Keyframes(frames, sorted) {
 
 //Finds the index of the nearest keyframe to the given time stamp.
 //If radius is specified, it will return the nearest only within that radius
-Keyframes.prototype.getIndex = function(time, radius) {
+Keyframes.prototype.nearestIndex = function(time, radius) {
     radius = typeof radius === 'number' ? radius : Number.MAX_VALUE
     var minDist = Number.MAX_VALUE
     var nearest = -1
@@ -32,14 +32,14 @@ Keyframes.prototype.getIndex = function(time, radius) {
 }
 
 //Gets the keyframe at the index
-Keyframes.prototype.get = function(time, radius) {
-    var idx = this.getIndex(time, radius)
+Keyframes.prototype.nearest = function(time, radius) {
+    var idx = this.nearestIndex(time, radius)
     return idx === -1 ? null : this.frames[idx]
 }
 
 //Gets the keyframe at the index
-Keyframes.prototype.at = function(time) {
-    return this.get(time, 0)
+Keyframes.prototype.get = function(time) {
+    return this.nearest(time, 0)
 }
 
 //lerps the value at the specified time stamp

@@ -19,7 +19,10 @@ keyframes.add({ time: 4, value: 100 })
 var eased = keyframes.value( timeStamp ) 
 
 //get the closest keyframe within given (time) radius
-var closest = keyframes.get( timeStamp, radius )
+var closest = keyframes.nearest( timeStamp, radius )
+
+//get the keyframe that matches the given time stamp
+var match = keyframes.get( timeStamp )
 
 //the underlying array
 console.log( keyframes.frames )
@@ -37,21 +40,21 @@ Creates a new set of keyframes, optionally with some frames to use as default. T
 
 It's assumed the list of keyframes is unsorted; but if it already has been, you can pass `false` for `sorted` and it won't perform another sort.
 
-#### `keys.get(timeStamp[, radius])`
+#### `keys.nearest(timeStamp[, radius])`
 
 Gets the nearest keyframe to the specified time stamp. If `radius` is not specified, this will return the closest keyframe. If `radius` is a number, this only returns the closest result within that distance; otherwise returns null.
 
-If radius is zero, this is a 'strict match' (i.e. only when time stamp is exactly matching the keyframe).
+If radius is zero, this function behaves the same as `keys.get()`. 
 
 If it can't find any keyframes, null is returned.
 
-#### `keys.getIndex(timeStamp[, radius])`
+#### `keys.nearestIndex(timeStamp[, radius])`
 
-Like `get()`, but returns an index to the `frames` array instead of a keyframe object.
+Like `nearest()`, but returns an index to the `frames` array instead of a keyframe object.
 
-#### `keys.at(timeStamp)`
+#### `keys.get(timeStamp)`
 
-Get the keyframe that matches this time stamp. Same as `keys.get(timeStamp, 0)`.
+A convenience method to get the keyframe exactly at the given time stamp. Same as `keys.nearest(timeStamp, 0)`.
 
 #### `keys.value(timeStamp[, ease])`
 
