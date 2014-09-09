@@ -49,6 +49,10 @@ If it can't find any keyframes, null is returned.
 
 Like `get()`, but returns an index to the `frames` array instead of a keyframe object.
 
+#### `keys.at(timeStamp)`
+
+Get the keyframe that matches this time stamp. Same as `keys.get(timeStamp, 0)`.
+
 #### `keys.value(timeStamp[, ease])`
 
 Determines the value at the given time stamp, based on keyframe interpolation.

@@ -37,6 +37,11 @@ Keyframes.prototype.get = function(time, radius) {
     return idx === -1 ? null : this.frames[idx]
 }
 
+//Gets the keyframe at the index
+Keyframes.prototype.at = function(time) {
+    return this.get(time, 0)
+}
+
 //lerps the value at the specified time stamp
 //returns null if no keyframes exist
 Keyframes.prototype.value = function(time, ease) {
