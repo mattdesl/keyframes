@@ -37,9 +37,14 @@ Keyframes.prototype.nearest = function(time, radius) {
     return idx === -1 ? null : this.frames[idx]
 }
 
-//Gets the keyframe at the index
+//Gets the keyframe at time
 Keyframes.prototype.get = function(time) {
     return this.nearest(time, 0)
+}
+
+//Gets the keyframe index at time
+Keyframes.prototype.getIndex = function(time) {
+    return this.nearestIndex(time, 0)
 }
 
 //lerps the value at the specified time stamp

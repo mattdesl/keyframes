@@ -53,8 +53,9 @@ If it can't find any keyframes, null is returned.
 Like `nearest()`, but returns an index to the `frames` array instead of a keyframe object.
 
 #### `keys.get(timeStamp)`
+#### `keys.getIndex(timeStamp)`
 
-A convenience method to get the keyframe exactly at the given time stamp. Same as `keys.nearest(timeStamp, 0)`.
+Convenience methods to get the keyframe or index exactly at the given time stamp. Same as `keys.nearest(timeStamp, 0)` and `keys.nearestIndex(timeStamp, 0)`.
 
 #### `keys.value(timeStamp[, ease])`
 
