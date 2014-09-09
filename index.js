@@ -126,10 +126,10 @@ Keyframes.prototype.sort = function() {
     this.frames.sort(sort)
 }
 
-// //Clears the keyframe list
-// Keyframes.prototype.clear = function() {
-//     this.frames.length = 0
-// }
+//Clears the keyframe list
+Keyframes.prototype.clear = function() {
+    this.frames.length = 0
+}
 
 Object.defineProperty(Keyframes.prototype, "count", {
     get: function() {
