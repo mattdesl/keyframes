@@ -34,6 +34,14 @@ test('timeline controls', function(t) {
 	t.deepEqual(c1.previous(4), sorted[1], 'jumps to previous keyframe')
 	t.deepEqual(c1.previous(4.5), sorted[2], 'jumps to previous keyframe')
 
+	t.equal(c1.value(0), 3, 'interpolation')
+	t.equal(c1.value(1), 2, 'interpolation')
+	t.equal(c1.value(-1), 3, 'interpolation')
+	t.equal(c1.value(4), 2, 'interpolation')
+	t.equal(c1.value(3), 1.5, 'interpolation')
+	t.equal(c1.value(5), 2, 'interpolation')
+
+
 	var idx = c1.getIndex(4)
 	c1.splice(idx, 1)
 	sorted.splice(idx, 1)

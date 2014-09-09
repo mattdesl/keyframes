@@ -1,7 +1,7 @@
 //Generic list of keyframes with timestamps and values
 
 var lerpNumbers = require('./lerp-numbers')
-var range = require('./range-of')
+var range = require('unlerp')
 
 function sort(a, b) {
     return a.time - b.time
@@ -45,8 +45,8 @@ Keyframes.prototype.value = function(time, ease) {
 
     var prev = -1
     //get last keyframe to time
-    for (var i=keyframes.length-1; i>=0; i--) {
-        if (time >= keyframes[i].time) {
+    for (var i=this.frames.length-1; i>=0; i--) {
+        if (time >= this.frames[i].time) {
             prev = i
             break
         }
