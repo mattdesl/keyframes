@@ -78,6 +78,10 @@ To be called when you manually change the underlying `frames` structure (i.e. af
 
 The underlying array that holds keyframes.
 
+#### `keys.count`
+
+A getter for `keys.frames.length`.
+
 ## License
 
 MIT, see [LICENSE.md](http://github.com/mattdesl/keyframes/blob/master/LICENSE.md) for details.
