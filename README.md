@@ -57,7 +57,7 @@ Like `nearest()`, but returns an index to the `frames` array instead of a keyfra
 
 Convenience methods to get the keyframe or index exactly at the given time stamp. Same as `keys.nearest(timeStamp, 0)` and `keys.nearestIndex(timeStamp, 0)`.
 
-#### `keys.value(timeStamp[, ease])`
+#### `keys.value(timeStamp[, ease][, out])`
 
 Determines the value at the given time stamp, based on keyframe interpolation.
 
