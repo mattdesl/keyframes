@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "lerp": "^1.0.0",
+    "lerp-array": "^1.0.0",
     "unlerp": "^1.0.0"
   },
   "devDependencies": {

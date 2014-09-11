@@ -1,6 +1,6 @@
 //Generic list of keyframes with timestamps and values
 
-var lerpNumbers = require('./lerp-numbers')
+var lerp = require('lerp-array')
 var range = require('unlerp')
 
 function sort(a, b) {
@@ -82,7 +82,7 @@ Keyframes.prototype.value = function(time, ease) {
             return ease(startFrame, endFrame, t)
 
         //Otherwise we assume the values are simple numbers and lerp them
-        return lerpNumbers(startFrame.value, endFrame.value, t)
+        return lerp(startFrame.value, endFrame.value, t)
     }
 }
 
