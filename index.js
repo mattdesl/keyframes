@@ -3,6 +3,15 @@
 var lerp = require('lerp-array')
 var range = require('unlerp')
 
+var temp = [0, 0, 0]
+
+function vec3(out, x, y, z) {
+    out[0] = x
+    out[1] = y
+    out[2] = z
+    return out
+}
+
 function sort(a, b) {
     return a.time - b.time
 }
@@ -50,8 +59,30 @@ Keyframes.prototype.getIndex = function(time) {
 //lerps the value at the specified time stamp
 //returns null if no keyframes exist
 Keyframes.prototype.value = function(time, ease) {
-    if (this.frames.length === 0)
+    var v = this.interpolation(time)
+    if (v[0] === -1 || v[1] === -1)
         return null
+
+    var startFrame = this.frames[ v[0] ]
+    var endFrame = this.frames[ v[1] ]
+    var t = v[2]
+    
+    //frames are the same, don't bother easing
+    if (startFrame === endFrame)
+        return startFrame.value
+
+    //We ease from left keyframe to right, with a custom easing
+    //equation if specified
+    if (typeof ease === 'function')
+        return ease(startFrame, endFrame, t)
+
+    //Otherwise we assume the values are simple numbers and lerp them
+    return lerp(startFrame.value, endFrame.value, t)
+}
+
+Keyframes.prototype.interpolation = function(time) {
+    if (this.frames.length === 0)
+        return vec3(temp, -1, -1, 0)
 
     var prev = -1
     //get last keyframe to time
@@ -66,7 +97,7 @@ Keyframes.prototype.value = function(time, ease) {
     if (prev === -1 || prev === this.frames.length-1) {
         if (prev < 0)
             prev = 0
-        return this.frames[prev].value
+        return vec3(temp, prev, prev, 0)
     } 
     else {
         var startFrame = this.frames[prev]
@@ -76,13 +107,8 @@ Keyframes.prototype.value = function(time, ease) {
         time = Math.max(startFrame.time, Math.min(time, endFrame.time))
         var t = range(startFrame.time, endFrame.time, time)
 
-        //We ease from left keyframe to right, with a custom easing
-        //equation if specified
-        if (typeof ease === 'function')
-            return ease(startFrame, endFrame, t)
-
-        //Otherwise we assume the values are simple numbers and lerp them
-        return lerp(startFrame.value, endFrame.value, t)
+        //provide interpolation factor
+        return vec3(temp, prev, prev+1, t)
     }
 }
 

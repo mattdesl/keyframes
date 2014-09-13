@@ -96,6 +96,14 @@ The underlying array that holds keyframes.
 
 A getter for `keys.frames.length`.
 
+#### `keys.interpolation(time)`
+
+This is a more advanced method that returns the start and end indices and interpolation factor for a time stamp. The return value is an array with [startFrameIndex, endFrameIndex, factor]. If we are sitting on a keyframe, then start and end indices will be equal. If we have no keyframes, both indices will be -1.
+
+The returned array is *re-used* to reduce GC load. You should not store reference to it since it will change with subsequent calls. 
+
+This is useful for tools that wish to separate the easing function (i.e. remap the value of t using [eases](https://nodei.co/npm/eases/)) from a user-defined interpolator (i.e. interpolating objects with `{x, y}` properties). 
+
 ## License
 
 MIT, see [LICENSE.md](http://github.com/mattdesl/keyframes/blob/master/LICENSE.md) for details.
