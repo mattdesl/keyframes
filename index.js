@@ -113,7 +113,7 @@ Keyframes.prototype.interpolation = function(time) {
 }
 
 Keyframes.prototype.next = function(time) {
-    if (this.frames.length <= 1)
+    if (this.frames.length < 1)
         return null
 
     var cur = -1
@@ -128,7 +128,7 @@ Keyframes.prototype.next = function(time) {
 }
 
 Keyframes.prototype.previous = function(time) {
-    if (this.frames.length <= 1)
+    if (this.frames.length < 1)
         return null
 
     var cur = -1

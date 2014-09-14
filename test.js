@@ -54,5 +54,9 @@ test('timeline controls', function(t) {
 	sorted.splice(0, 0, newItem)
 	t.notDeepEqual(c1.frames, sorted, 'splice insert re-sorts array')
 
+	var two = Keyframes([ { time: 0, value: 50 }])
+	t.equal(two.previous(100), two.frames[0])
+	t.equal(two.next(100), null)
+
 	t.end()
 })
