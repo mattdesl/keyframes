@@ -67,10 +67,6 @@ Keyframes.prototype.value = function(time, ease) {
     var endFrame = this.frames[ v[1] ]
     var t = v[2]
     
-    //frames are the same, don't bother easing
-    if (startFrame === endFrame)
-        return startFrame.value
-
     //We ease from left keyframe to right, with a custom easing
     //equation if specified
     if (typeof ease === 'function')
