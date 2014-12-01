@@ -1,6 +1,6 @@
 {
   "name": "keyframes",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "keyframe utils for a generic timeline",
   "main": "index.js",
   "license": "MIT",
