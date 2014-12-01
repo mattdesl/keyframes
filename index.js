@@ -12,7 +12,7 @@ function sort(a, b) {
 
 function Keyframes(frames, sorted) {
     if (!(this instanceof Keyframes)) 
-        return new Keyframes(frames)
+        return new Keyframes(frames, sorted)
     this.frames = frames||[]
     if (!sorted)
         this.sort()
