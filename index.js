@@ -2,15 +2,9 @@
 
 var lerp = require('lerp-array')
 var range = require('unlerp')
+var vec3 = require('gl-vec3/set')
 
 var temp = [0, 0, 0]
-
-function vec3(out, x, y, z) {
-    out[0] = x
-    out[1] = y
-    out[2] = z
-    return out
-}
 
 function sort(a, b) {
     return a.time - b.time

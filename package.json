@@ -9,6 +9,7 @@
     "email": "dave.des@gmail.com"
   },
   "dependencies": {
+    "gl-vec3": "^1.0.2",
     "lerp-array": "^1.0.0",
     "unlerp": "^1.0.0"
   },
