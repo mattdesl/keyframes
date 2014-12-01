@@ -1,5 +1,3 @@
-[![browser support](https://ci.testling.com/mattdesl/keyframes.png)](https://ci.testling.com/mattdesl/keyframes)
-
 # keyframes
 
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
