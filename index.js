@@ -52,7 +52,7 @@ Keyframes.prototype.getIndex = function(time) {
 
 //lerps the value at the specified time stamp
 //returns null if no keyframes exist
-Keyframes.prototype.value = function(time, ease) {
+Keyframes.prototype.value = function(time, interpolator, out) {
     var v = this.interpolation(time)
     if (v[0] === -1 || v[1] === -1)
         return null
@@ -61,13 +61,13 @@ Keyframes.prototype.value = function(time, ease) {
     var endFrame = this.frames[ v[1] ]
     var t = v[2]
     
-    //We ease from left keyframe to right, with a custom easing
+    //We interpolator from left keyframe to right, with a custom easing
     //equation if specified
-    if (typeof ease === 'function')
-        return ease(startFrame, endFrame, t)
+    if (typeof interpolator === 'function')
+        return interpolator(startFrame, endFrame, t, out)
 
     //Otherwise we assume the values are simple numbers and lerp them
-    return lerp(startFrame.value, endFrame.value, t)
+    return lerp(startFrame.value, endFrame.value, t, out)
 }
 
 Keyframes.prototype.interpolation = function(time) {

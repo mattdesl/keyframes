@@ -26,7 +26,7 @@ var match = keyframes.get( timeStamp )
 console.log( keyframes.frames )
 ```
 
-This does not make any assumptions about the unit of time. The `value` for a keyframe is generally a number or array of numbers, but you could also use a custom `ease` function (see below) if you want to support color strings or some other data type. 
+This does not make any assumptions about the unit of time. The `value` for a keyframe is generally a number or array of numbers, but you could also use a custom `interpolation` function (see below) if you want to support color strings or some other data type. 
 
 ## Usage
 
@@ -55,15 +55,37 @@ Like `nearest()`, but returns an index to the `frames` array instead of a keyfra
 
 Convenience methods to get the keyframe or index exactly at the given time stamp. Same as `keys.nearest(timeStamp, 0)` and `keys.nearestIndex(timeStamp, 0)`.
 
-#### `keys.value(timeStamp[, ease][, out])`
+#### `keys.value(timeStamp[, interpolator][, out])`
 
 Determines the value at the given time stamp, based on keyframe interpolation.
 
 If the time stamp falls on a keyframe, the value of that keyframe will be returned. If the time stamp falls between two keyframes, we use linear interpolation between the two. The result is clamped to the first and last keyframes; so if your first keyframe is at `2.5` and you're querying the value at `0.0`, the returned value will be of the keyframe at `2.5`. 
 
-The `value` of keyframes can be numbers or arrays of numbers. For arrays, you should not manipulate the interpolated result in-place as it may be a direct reference to one of the keyframes' `value`.
+Here, `out` will get passed to the interpolator function. The default interpolator function is [lerp-array](https://www.npmjs.com/package/lerp-array) – this allows you to re-use arrays instead of creating new ones per frame.
 
-You can also pass your own interpolation function for custom easings. This will get called with `(startFrame, endFrame, t)`, which you can operate to return a value. This may be useful if your values are, for example, color strings and need a custom easing. 
+You can also pass your own `interpolator` function for custom features and easings. This will get called with `(startFrame, endFrame, t, out)`, which you can operate to return a value. This may be useful if your values are, for example, color strings and need a custom easing. 
+
+Example:
+
+```js
+var expoOut = require('eases/expo-out')
+var lerpArray = require('lerp-array')
+
+var keys = [
+  { time: 0, value: [ 0, 0 ] },
+  { time: 1, value: [ 10, 5 ] }
+]
+
+// get interpolated value at time stamp 0.5 
+var result = timeline.value(0.5)
+//=> [ 5, 2.5 ]
+
+// get the value with custom interpolation
+var result2 = timeline.value(0.5, function (a, b, t) {
+  t = expoOut(t) // remap time
+  return lerpArray(a, b, t)
+})
+```
 
 #### `keys.next(timeStamp)` 
 #### `keys.previous(timeStamp)`
@@ -96,7 +118,13 @@ A getter for `keys.frames.length`.
 
 #### `keys.interpolation(time)`
 
-This is a more advanced method that returns the start and end indices and interpolation factor for a time stamp. The return value is an array with [startFrameIndex, endFrameIndex, factor]. If we are sitting on a keyframe, then start and end indices will be equal. If we have no keyframes, both indices will be -1.
+This is a more advanced method that returns the start and end indices and interpolation factor for a time stamp. The return value is an array with the following format: 
+
+```js
+[startFrameIndex, endFrameIndex, interpolationFactor]
+```
+
+If we are sitting on a keyframe, then start and end indices will be equal. If we have no keyframes, both indices will be -1.
 
 The returned array is *re-used* to reduce GC load. You should not store reference to it since it will change with subsequent calls. 
 

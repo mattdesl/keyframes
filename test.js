@@ -2,6 +2,32 @@ var test = require('tape').test
 
 var Keyframes = require('./')
 
+test('simple', function (t) {
+	var keys = [
+		{ time: 0, value: [ 0, 0 ] },
+		{ time: 1, value: [ 10, 5 ] }
+	]
+
+	var timeline = Keyframes(keys)
+	var array = [ 0, 0 ]
+	var newArray = timeline.value(0.5, undefined, array)
+	t.equal(newArray, array, 're-uses array')
+	t.deepEqual(newArray, [ 5, 2.5 ], 'interpolates array')
+
+	timeline.value(0.5, function (start, end, time, out) {
+		out[0] = 50
+		out[1] = 25
+		t.deepEqual(start, keys[0], 'gets first')
+		t.deepEqual(end, keys[1], 'gets last')
+		t.equal(time, 0.5, 'gets time')
+	}, array)
+	t.deepEqual(array, [ 50, 25 ], 'gets custom interpolation')
+
+	t.deepEqual(timeline.value(-1), [ 0, 0 ], 'first keyframe')
+	t.deepEqual(timeline.value(1000), [ 10, 5 ], 'last keyframe')
+	t.end()
+})
+
 test('timeline controls', function(t) {
 	var keys = [
 		{ time: 2, value: 1 },
